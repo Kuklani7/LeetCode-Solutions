@@ -1,0 +1,17 @@
+class Solution {
+    public int jump(int[] nums) {
+        int tee=nums.length-1;
+        int counter=0;
+        while(tee!=0){
+            int min_pot=Integer.MAX_VALUE;
+            for(int i=tee-1;i>=0;i--){
+                if(nums[i]+i>=tee){
+                    min_pot=i;
+                }
+            }
+            counter++;
+            tee=min_pot;
+        }
+        return counter;
+    }
+}
