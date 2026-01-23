@@ -1,0 +1,30 @@
+class Solution {
+    public int climbStairs(int n) {
+        if(n==0){
+            return 1;
+        }
+        if(n==1){
+            return 1;
+        }
+        if(n==2){
+            return 2;
+        }
+        int [] store= new int [n-1];
+        int res_value=solver(n,store);
+        return res_value;
+    }
+    private static int solver(int n, int [] store){
+        if(n==0){
+            return 1;
+        }
+        if(n==1){
+            return 1;
+        }
+        if(store[n-2]!=0){
+            return store[n-2];
+        }
+        int result=solver(n-1,store)+solver(n-2,store);
+        store[n-2]=result;
+        return result;
+    }
+}
