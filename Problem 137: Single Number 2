@@ -1,0 +1,16 @@
+class Solution {
+    Set<Integer> tracker=new HashSet<>();
+    public int singleNumber(int[] nums) {
+        long sum_tracker=0;
+        long actual_sum=0;
+        for(int x:nums){
+            actual_sum+=x;
+            if(!tracker.contains(x)){
+                sum_tracker+=(long)x*3;
+            }
+            tracker.add(x);
+        }
+        int res_val=(int) ((sum_tracker-actual_sum)/2);
+        return res_val;
+    }
+}
