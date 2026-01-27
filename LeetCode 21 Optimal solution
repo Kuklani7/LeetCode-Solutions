@@ -1,0 +1,34 @@
+class Solution {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode dummy_head=new ListNode(0);
+        ListNode moving_pointer=dummy_head;
+        while(l1!=null || l2!=null){
+            int l1_val=0;
+            int l2_val=0;
+            if(l1==null){
+                l1_val=Integer.MAX_VALUE;
+            }
+            else{
+                l1_val=l1.val;
+            }
+            if(l2==null){
+                l2_val=Integer.MAX_VALUE;
+            }
+            else{
+                l2_val=l2.val;
+            }
+            if(l1_val<=l2_val){
+                moving_pointer.next=new ListNode(l1_val);
+                moving_pointer=moving_pointer.next;
+                l1=l1.next;
+            }
+            else{
+                moving_pointer.next=new ListNode(l2_val);
+                moving_pointer=moving_pointer.next;
+                l2=l2.next;
+            }
+        }
+        dummy_head=dummy_head.next;
+        return dummy_head;
+    }
+}
