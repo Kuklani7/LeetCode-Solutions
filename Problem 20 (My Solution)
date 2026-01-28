@@ -1,0 +1,47 @@
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Integer> looker=new Stack<>();
+        for(int x=0;x<s.length();x++){
+            int iter=0;
+            if(s.charAt(x)=='('){
+                iter=1;
+            }
+            else if(s.charAt(x)==')'){
+                iter=2;
+            }
+            else if(s.charAt(x)=='{'){
+                iter=3;
+            }
+            else if(s.charAt(x)=='}'){
+                iter=4;
+            }
+            else if(s.charAt(x)=='['){
+                iter=5;
+            }
+            else{
+                iter=6;
+            }
+            if(looker.isEmpty() && iter%2==0){
+                return false;
+            }
+            else if(looker.isEmpty() && iter%2!=0){
+                looker.push(iter);
+            }
+            else if(!looker.isEmpty() && iter==looker.peek()+1){
+                looker.pop();
+            }
+            else if(!looker.isEmpty() && iter%2==0){
+                return false;
+            }
+            else{
+                looker.push(iter);
+            }
+        }
+        if(looker.isEmpty()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+}
