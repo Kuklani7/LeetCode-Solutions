@@ -1,0 +1,41 @@
+class Solution {
+    public String countAndSay(int n) {
+        if(n==1){
+            return "1";
+        }
+        String first="1";
+        while(n-1!=0){
+            String builder="";
+            for(int i=0;i<first.length();){
+                char resp=first.charAt(i);
+                int counter=0;
+                boolean hecker=false;
+                for(int j=i;j<first.length();j++){
+                    if(first.charAt(j)==resp){
+                        counter++;
+                        if(j==first.length()-1){
+                            hecker=true;
+                        }
+                    }
+                    if(hecker){
+                        builder+=counter;
+                        builder+=resp;
+                        break;
+                    }
+                    if(first.charAt(j)!=resp){
+                        i+=counter;
+                        builder+=counter;
+                        builder+=resp;
+                        break;
+                    }
+                }
+                if(hecker){
+                    break;
+                }
+            }
+            first=builder;
+            n--;
+        }
+        return first;
+    }
+}
