@@ -1,0 +1,25 @@
+class Solution {
+    public int romanToInt(String s) {
+        HashMap<Character,Integer> value_mapper=new HashMap<>();
+        value_mapper.put('I',1);
+        value_mapper.put('V',5);
+        value_mapper.put('X',10);
+        value_mapper.put('L',50);
+        value_mapper.put('C',100);
+        value_mapper.put('D',500);
+        value_mapper.put('M',1000);
+        int value_creator=0;
+        for(int i=0;i<s.length()-1;i++){
+            int curr_val=value_mapper.get(s.charAt(i));
+            int next_val=value_mapper.get(s.charAt(i+1));
+            if(curr_val<next_val){
+                value_creator-=curr_val;
+            }
+            else{
+                value_creator+=curr_val;
+            }
+        }
+        value_creator+=value_mapper.get(s.charAt(s.length()-1));
+        return value_creator;
+    }
+}
