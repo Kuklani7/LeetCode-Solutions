@@ -1,0 +1,24 @@
+class Solution {
+    public boolean checkOnesSegment(String s) {
+       char first=s.charAt(0);
+       boolean delicate=false;
+       if(first=='1'){
+        delicate=true;
+       }
+       int counter=0;
+       int indexer=0;
+       for(int i=1;i<s.length();i++){
+        if(s.charAt(indexer)=='0' && s.charAt(i)=='1'){
+            counter++;
+            if(delicate && counter==1){
+                return false;
+            }
+            if(counter==2){
+                return false;
+            }
+        }
+        indexer++;
+       }
+       return true;
+    }
+}
