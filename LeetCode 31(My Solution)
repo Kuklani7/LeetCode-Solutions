@@ -1,0 +1,38 @@
+class Solution {
+    public void nextPermutation(int[] nums) {
+        int tracker=-1;
+        boolean descender=true;
+        int min=Integer.MAX_VALUE;
+        for(int i=nums.length-2;i>-1;i--){
+            if(nums[i]<nums[i+1]){
+                descender=false;
+                tracker=i;
+                break;
+            }
+        }
+        if(descender){
+            Arrays.sort(nums);
+        }
+        else{
+            int idx_saver=-1;
+            for(int j=tracker+1;j<nums.length;j++){
+                if(nums[j]<min && nums[j]>nums[tracker]){
+                    min=nums[j];
+                    idx_saver=j;
+                }
+            }
+            int temp=nums[tracker];
+            nums[tracker]=nums[idx_saver];
+            nums[idx_saver]=temp;
+            ArrayList<Integer> sorter=new ArrayList<>();
+            for(int j=tracker+1;j<nums.length;j++){
+                sorter.add(nums[j]);
+            }
+            Collections.sort(sorter);
+            for(int x:sorter){
+                nums[tracker+1]=x;
+                tracker++;
+            }
+        }
+    }
+}
