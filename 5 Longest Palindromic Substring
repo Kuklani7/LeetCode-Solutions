@@ -1,0 +1,70 @@
+class Solution {
+    public String longestPalindrome(String s) {
+        if(s.length()==1 || s.length()==0){
+            return s;
+        }
+        List<String> stringing=new ArrayList<>();
+        for(int i=0;i<s.length()-1;i++){
+            boolean alter_behave=true;
+            int correcter=1;
+            if(s.charAt(i)==s.charAt(i+1)){
+                while(alter_behave){
+                    char left='#';
+                    char right='%';
+                    if(i-correcter>=0){
+                        left=s.charAt(i-correcter);
+                    }
+                    if((i+1)+correcter<=s.length()-1){
+                        right=s.charAt(i+1+correcter);
+                    }
+                    if(left==right){
+                        correcter++;
+                        continue;
+                    }
+                    else{
+                        String curr_iter="";
+                        for(int j=(i-correcter)+1;j<(i+1)+correcter;j++){
+                            curr_iter+=s.charAt(j);
+                        }
+                        stringing.add(curr_iter);
+                        System.out.println(curr_iter);
+                        alter_behave=false;
+                    }
+                }
+            }
+            boolean heil=true;
+            int correction=1;
+            while(heil){
+                char left='#';
+                char right='%';
+                if(i-correction>=0){
+                    left=s.charAt(i-correction);
+                }
+                if(i+correction<=s.length()-1){
+                    right=s.charAt(i+correction);
+                }
+                if(left==right){
+                    correction++;
+                    continue;
+                }
+                else{
+                    String curr_iter="";
+                    for(int j=(i-correction)+1;j<i+correction;j++){
+                        curr_iter+=s.charAt(j);
+                    }
+                    stringing.add(curr_iter);
+                    System.out.println(curr_iter);
+                    heil=false;
+                }
+            }
+        }
+        int max_length=0;
+        String largest="";
+        for(String x:stringing){
+            if(x.length()>largest.length()){
+                largest=x;
+            }
+        }
+        return largest;
+    }
+}
