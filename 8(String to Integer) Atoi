@@ -1,0 +1,76 @@
+class Solution {
+    public int myAtoi(String s) {
+        boolean leading_spaces_over=false;
+        boolean numbers=false;
+        boolean sign_set=false;
+        boolean positive=true;
+        int num_builder=0;
+        int max=Integer.MAX_VALUE;
+        int max_checker=max/10;
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)==' '){
+                if(leading_spaces_over){
+                    break;
+                }
+                if(!numbers){
+                    continue;
+                }
+                else{
+                    break;
+                }
+            }
+            if((s.charAt(i)=='+' || s.charAt(i)=='-') && numbers){
+                break;
+            }
+            if(s.charAt(i)=='+' && (!sign_set)){
+                sign_set=true;
+                leading_spaces_over=true;
+                continue;
+            }
+            if(s.charAt(i)=='-' && (!sign_set)){
+                sign_set=true;
+                positive=false;
+                leading_spaces_over=true;
+                continue;
+            }
+            if((s.charAt(i)=='+' || s.charAt(i)=='-') && sign_set){
+                break;
+            }
+            if(s.charAt(i)<48 || s.charAt(i)>57){
+                break;
+            }
+            if(num_builder>max_checker){
+                if(positive){
+                    return Integer.MAX_VALUE;
+                }
+                else{
+                    return Integer.MIN_VALUE;
+                }
+            }
+            if(num_builder==max_checker){
+                if(positive){
+                    if(s.charAt(i)>54){
+                        return Integer.MAX_VALUE;
+                    }
+                }
+                else{
+                    if(s.charAt(i)>55){
+                        return Integer.MIN_VALUE;
+                    }
+                }
+            }
+            if(48<= s.charAt(i) && s.charAt(i)<=57){
+                numbers=true;
+                leading_spaces_over=true;
+                int curr_val=s.charAt(i)-'0';
+                num_builder=num_builder*10+curr_val;
+            }
+        }
+        if(positive){
+            return num_builder;
+        }
+        else{
+            return (-1*num_builder);
+        }
+    }
+}
