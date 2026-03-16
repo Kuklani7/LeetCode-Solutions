@@ -1,0 +1,63 @@
+class Solution {
+    public String intToRoman(int num) {
+        StringBuilder result=new StringBuilder();
+        ArrayList<Character> reflection=new ArrayList<>(Arrays.asList('I','V','X','L','C','D','M'));
+        ArrayList<Integer> worker=new ArrayList<>(Arrays.asList(1,5,10,50,100,500,1000));
+        while(num!=0){
+            int dividend=1;
+            while(dividend*10<=num){
+                dividend*=10;
+            }
+            int left_digit=num/dividend;
+            if(left_digit!=4 && left_digit!=9){
+                int mark=0;
+                for(int i=0;i<worker.size();i++){
+                    if(worker.get(i)<=num){
+                        mark=i;
+                    }
+                }
+                result.append(reflection.get(mark));
+                num-=worker.get(mark);
+            }
+            else{
+                if(left_digit==4 && num>=400){
+                    result.append('C');
+                    result.append('D');
+                    num-=400;
+                    continue;
+                }
+                if(left_digit==4 && num>=40){
+                    result.append(reflection.get(2));
+                    result.append(reflection.get(3));
+                    num-=40;
+                    continue;
+                }
+                if(left_digit==4 && num==4){
+                    result.append(reflection.get(0));
+                    result.append(reflection.get(1));
+                    num-=4;
+                }
+                if(left_digit==9 && num>=900){
+                    result.append('C');
+                    result.append('M');
+                    num-=900;
+                    continue;
+                }
+                if(left_digit==9 && num>=90){
+                    result.append('X');
+                    result.append('C');
+                    num-=90;
+                    continue;
+                }
+                if(left_digit==9 && num==9){
+                    result.append(reflection.get(0));
+                    result.append(reflection.get(2));
+                    num-=9;
+                }
+                
+                
+            }
+        }
+        return result.toString();
+    }
+}
