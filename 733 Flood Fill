@@ -1,0 +1,56 @@
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+        if(image[sr][sc]==color){
+            return image;
+        }
+        int color_record=image[sr][sc];
+        Queue<int []> flooder=new LinkedList<>();
+        int [] hmm=new int [2];
+        hmm[0]=sr;
+        hmm[1]=sc;
+        flooder.add(hmm);
+        image[sr][sc]=color;
+        while(!flooder.isEmpty()){
+            int [] curr=flooder.remove();
+            int i=curr[0];
+            int j=curr[1];
+            if(i-1>=0 && i-1<image.length && j>=0 && j<image[0].length){
+                if(image[i-1][j]==color_record){
+                    image[i-1][j]=color;
+                    int [] adder=new int [2];
+                    adder[0]=i-1;
+                    adder[1]=j;
+                    flooder.add(adder);
+                }
+            }
+            if(i+1>=0 && i+1<image.length && j>=0 && j<image[0].length){
+                if(image[i+1][j]==color_record){
+                    image[i+1][j]=color;
+                    int [] adder=new int [2];
+                    adder[0]=i+1;
+                    adder[1]=j;
+                    flooder.add(adder);
+                }
+            }
+            if(i>=0 && i<image.length && j-1>=0 && j-1<image[0].length){
+                if(image[i][j-1]==color_record){
+                    image[i][j-1]=color;
+                    int [] adder=new int [2];
+                    adder[0]=i;
+                    adder[1]=j-1;
+                    flooder.add(adder);
+                }
+            }
+            if(i>=0 && i<image.length && j+1>=0 && j+1<image[0].length){
+                if(image[i][j+1]==color_record){
+                    image[i][j+1]=color;
+                    int [] adder=new int [2];
+                    adder[0]=i;
+                    adder[1]=j+1;
+                    flooder.add(adder);
+                }
+            }
+        }
+        return image;
+    }
+}
