@@ -1,0 +1,73 @@
+class Solution {
+    private static void quickSort(int [] nums, int low, int high){
+            if(low<high){
+                int pivotIndex=partition(nums,low,high);
+                quickSort(nums,pivotIndex+1,high);
+                quickSort(nums,low,pivotIndex-1);
+            }
+        }
+        private static int partition(int [] nums, int low, int high){
+            int i=low-1;
+            int fixer=nums[high];
+            for(int j=low;j<high;j++){
+                if(nums[j]<=fixer){
+                    i++;
+                    int temp=nums[j];
+                    nums[j]=nums[i];
+                    nums[i]=temp;
+                }
+            }
+            int temp=nums[i+1];
+            nums[i+1]=nums[high];
+            nums[high]=temp;
+            return i+1;
+        }
+    public List<List<Integer>> threeSum(int[] nums) {
+        quickSort(nums,0,nums.length-1);
+        List<List<Integer>> ret_val=new ArrayList<>();
+        for(int i=0;i<nums.length;i++){
+            if(i!=0 && nums[i]==nums[i-1]){
+                continue;
+            }
+            int a=nums[i];
+            int to_find=-a;
+            int left=i+1;
+            int right=nums.length-1;
+            while(left<right){
+                if(nums[left]+nums[right]<-a){
+                    left++;
+                    continue;
+                }
+                if(nums[left]+nums[right]>-a){
+                    right--;
+                    continue;
+                }
+                if(nums[left]+nums[right]==-a){
+                    ArrayList<Integer> current= new ArrayList<>(Arrays.asList(a,nums[left],nums[right]));
+                    ret_val.add(current);
+                    int lefter=nums[left];
+                    int righter=nums[right];
+                    left++;
+                    right--;
+                    for(int j=left;j<nums.length;j++){
+                        if(nums[j]==lefter){
+                            left++;
+                        }
+                        else{
+                            break;
+                        }
+                    }
+                    for(int j=right;j>-1;j--){
+                        if(nums[j]==righter){
+                            right--;
+                        }
+                        else{
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return ret_val;
+    }
+}
