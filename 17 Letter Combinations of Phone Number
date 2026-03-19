@@ -1,0 +1,35 @@
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        HashMap<Integer, String> representor=new HashMap<>();
+        representor.put(2,"abc");
+        representor.put(3,"def");
+        representor.put(4,"ghi");
+        representor.put(5,"jkl");
+        representor.put(6,"mno");
+        representor.put(7,"pqrs");
+        representor.put(8,"tuv");
+        representor.put(9,"wxyz");
+        List<String> result=new ArrayList<>();
+        int first=digits.charAt(0)-'0';
+        String starter=representor.get(first);
+        for(int i=0;i<starter.length();i++){
+            String iter="";
+            iter+=starter.charAt(i);
+            result.add(iter);
+        }
+        for(int i=1;i<digits.length();i++){
+            int extract=digits.charAt(i)-'0';
+            String curr=representor.get(extract);
+            List<String> newer=new ArrayList<>();
+            for(int j=0;j<curr.length();j++){
+                char append=curr.charAt(j);
+                for(String x:result){
+                    String addant=x+append;
+                    newer.add(addant);
+                }
+            }
+            result=newer;
+        }
+        return result;
+    }
+}
