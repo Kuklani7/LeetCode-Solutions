@@ -1,0 +1,64 @@
+class Solution {
+    public int compress(char[] chars) {
+        int left=0;
+        int inserter=0;
+        while(left!=chars.length){
+            char curr_char=chars[left];
+            int counter=0;
+            for(int right=left;right<chars.length;right++){
+                if(chars[right]==chars[left]){
+                    counter++;
+                    continue;
+                }
+                if(counter==1){
+                    chars[inserter]=curr_char;
+                    inserter++;
+                    left=right;
+                    counter=0;
+                    break;
+                }
+                if(counter>1){
+                    chars[inserter]=curr_char;
+                    inserter++;
+                    int divisor=1;
+                    while(divisor*10<=counter){
+                        divisor*=10;
+                    }
+                    while(divisor!=0){
+                        int curr_num=counter/divisor;
+                        chars[inserter]= (char) (curr_num+48);
+                        inserter++;
+                        counter%=divisor;
+                        divisor/=10;
+                    }
+                    left=right;
+                    break;
+                }
+            }
+            if(counter!=0){
+                if(counter==1){
+                    chars[inserter]=curr_char;
+                    inserter++;
+                    break;
+                }
+                if(counter>1){
+                    chars[inserter]=curr_char;
+                    inserter++;
+                    int divisor=1;
+                    while(divisor*10<=counter){
+                        divisor*=10;
+                    }
+                    while(divisor!=0){
+                        int curr_num=counter/divisor;
+                        chars[inserter]= (char) (curr_num+48);
+                        inserter++;
+                        counter%=divisor;
+                        divisor/=10;
+                    }
+                    break;
+                }
+            }
+        }
+        return inserter;
+    }
+}
