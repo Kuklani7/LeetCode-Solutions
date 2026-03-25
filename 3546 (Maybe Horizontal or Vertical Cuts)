@@ -1,0 +1,28 @@
+class Solution {
+    public boolean canPartitionGrid(int[][] grid) {
+        Set<Long> sums=new HashSet<>();
+        long total_sum=0;
+        for(int j=0;j<grid.length;j++){
+            for(int k=0;k<grid[0].length;k++){
+                total_sum+=grid[j][k];
+            }
+            sums.add(total_sum);
+        }
+        if(total_sum%2!=0){
+            return false;
+        }
+        long saver_sum=0;
+        for(int v=0; v <grid[0].length;v++){
+            for(int w=0; w<grid.length;w++){
+                saver_sum+=grid[w][v];
+            }
+            sums.add(saver_sum);
+        }
+        if(sums.contains(total_sum/2)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+}
