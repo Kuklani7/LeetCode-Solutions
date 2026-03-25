@@ -1,0 +1,35 @@
+class Solution {
+    public int minSubArrayLen(int target, int[] nums) {
+        int summer=0;
+        for(int x:nums){
+            summer+=x;
+        }
+        if(summer<target){
+            return 0;
+        }
+        int left=0;
+        int right=0;
+        int sum=0;
+        int counter=0;
+        int min_val=Integer.MAX_VALUE;
+        while(right!=nums.length){
+            while(sum<target && right!=nums.length){
+                counter++;
+                sum+=nums[right];
+                right++;
+            }
+            if(counter<min_val){
+                min_val=counter;
+            }
+            while(sum>=target){
+                sum-=nums[left];
+                counter--;
+                left++;
+            }
+            if(counter+1<min_val){
+                min_val=counter+1;
+            }
+        }
+        return min_val;
+    }
+}
