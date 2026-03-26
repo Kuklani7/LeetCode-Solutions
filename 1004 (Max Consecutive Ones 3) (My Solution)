@@ -1,0 +1,39 @@
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        int left=0;
+        int right=0;
+        int number_ones=0;
+        if(nums[left]==1){
+            number_ones=1;
+        }
+        int max=Integer.MIN_VALUE;
+        while(right!=nums.length){
+            int window_size=(right-left)+1;
+            if((window_size-number_ones)<=k){
+                right++;
+                if(right==nums.length){
+                    if((right-left)>max){
+                        return (right-left);
+                    }
+                    else{
+                        return max;
+                    }
+                }
+                if(nums[right]==1){
+                    number_ones+=1;
+                }
+                continue;
+            }
+            if((right-left)>max){
+                max=right-left;
+            }
+            if((window_size-number_ones)>k){
+                if(nums[left]==1){
+                    number_ones--;
+                }
+                left++;
+            }
+        }
+        return max;
+    }
+}
