@@ -1,0 +1,40 @@
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        HashMap<Integer, Set<Integer>> tracker=new HashMap<>();
+        int [] essence_counter=new int [numCourses];
+        for(int i=0;i<prerequisites.length;i++){
+            int [] curr=prerequisites[i];
+            essence_counter[curr[0]]+=1;
+            if(!(tracker.containsKey(curr[0]))){
+                Set<Integer> putting=new HashSet<>();
+                putting.add(curr[1]);
+                tracker.put(curr[0],putting);
+                continue;
+            }
+            if(tracker.containsKey(curr[0])){
+                tracker.get(curr[0]).add(curr[1]);
+            }
+        }
+        Set<Integer> already_dealt=new HashSet<>();
+        int counter=0;
+        while(counter!=numCourses){
+            int hits=0;
+            for(int k=0;k<essence_counter.length;k++){
+                if(essence_counter[k]==0  && (! already_dealt.contains(k))){
+                    already_dealt.add(k);
+                    counter++;
+                    hits++;
+                    for(int dealer:tracker.keySet()){
+                        if(tracker.get(dealer).contains(k)){
+                            essence_counter[dealer]-=1;
+                        }
+                    }
+                }
+            }
+            if(hits==0){
+                return false;
+            }
+        }
+        return true;    
+    }
+}
