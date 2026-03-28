@@ -1,0 +1,22 @@
+class Solution {
+    public List<String> fizzBuzz(int n) {
+        List<String> ret_val=new ArrayList<>();
+        for(int i=1;i<=n;i++){
+            if(i%15==0){
+                ret_val.add("FizzBuzz");
+            }
+            else if(i%3==0){
+                ret_val.add("Fizz");
+            }
+            else if(i%5==0){
+                ret_val.add("Buzz");
+            }
+            else{
+                String addant="";
+                addant+=(i);
+                ret_val.add(addant);
+            }
+        }
+        return ret_val;
+    }
+}
