@@ -1,0 +1,24 @@
+class Solution {
+    public boolean uniqueOccurrences(int[] arr) {
+        HashMap<Integer,Integer> tracker=new HashMap<>();
+        Set<Integer> iter=new HashSet<>();
+        for(int x:arr){
+            if(!tracker.containsKey(x)){
+                tracker.put(x,1);
+            }
+            else{
+                int curr_val=tracker.get(x);
+                tracker.put(x,curr_val+1);
+            }
+        }
+        for(int x:tracker.keySet()){
+            if(!iter.contains(tracker.get(x))){
+                iter.add(tracker.get(x));
+            }
+            else{
+                return false;
+            }
+        }
+        return true;
+    }
+}
