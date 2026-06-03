@@ -1,0 +1,47 @@
+class Solution {
+    public int calPoints(String[] operations) {
+        Stack<Integer> oper=new Stack<>();
+        for(int i=0;i<operations.length;i++){
+            String current=operations[i];
+            if(current.charAt(0)=='+'){
+                int top=oper.pop();
+                int second=oper.peek();
+                oper.push(top);
+                oper.push(top+second);
+            }
+            else if(current.charAt(0)=='D'){
+                int to_add=oper.peek();
+                oper.push(to_add*2);
+            }
+            else if(current.charAt(0)=='C'){
+                oper.pop();
+            }
+            else{
+                boolean negative=false;
+                if(current.charAt(0)=='-'){
+                    negative=true;
+                }
+                int num_builder=0;
+                for(int j=0;j<current.length();j++){
+                    if(current.charAt(j)=='-'){}
+                    else if(current.charAt(j)>='0' && current.charAt(j)<='9'){
+                        int digit=(int) current.charAt(j);
+                        digit-=48;
+                        num_builder=num_builder*10+digit;
+                    }
+                    else{}
+                }
+                if(negative){
+                    num_builder*=-1;
+                }
+                oper.push(num_builder);
+            }
+        }
+        int running_sum=0;
+        while(!oper.isEmpty()){
+            int element=oper.pop();
+            running_sum+=element;
+        }
+        return running_sum;
+    }
+}
