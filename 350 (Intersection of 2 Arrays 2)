@@ -1,0 +1,33 @@
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        ArrayList<Integer> to_convert=new ArrayList<>();
+        HashMap<Integer,Integer> freq_mapper=new HashMap<>();
+        for(int i=0;i<nums1.length;i++){
+            if(!freq_mapper.containsKey(nums1[i])){
+                freq_mapper.put(nums1[i],1);
+            }
+            else{
+                int old=freq_mapper.get(nums1[i]);
+                freq_mapper.put(nums1[i],old+1);
+            }
+        }
+        for(int i=0;i<nums2.length;i++){
+            if(freq_mapper.containsKey(nums2[i])){
+                int count=freq_mapper.get(nums2[i]);
+                to_convert.add(nums2[i]);
+                if(count==1){
+                    freq_mapper.remove(nums2[i]);
+                }
+                else{
+                    freq_mapper.put(nums2[i],count-1);
+                }
+            }
+        }
+        int size=to_convert.size();
+        int [] ret_array=new int [size];
+        for(int i=0;i<to_convert.size();i++){
+            ret_array[i]=to_convert.get(i);
+        }
+        return ret_array;
+    }
+}
