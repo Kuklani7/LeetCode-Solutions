@@ -1,0 +1,16 @@
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode dummy_head=new ListNode(0,null);
+        while(head!=null){
+            ListNode to_add=new ListNode(head.val,null);
+            prepend(dummy_head, to_add);
+            head=head.next;
+        }
+        return dummy_head.next;
+    }
+    private static void prepend(ListNode dummy_head, ListNode to_insert){
+        ListNode saver=dummy_head.next;
+        dummy_head.next=to_insert;
+        to_insert.next=saver;
+    }
+}
