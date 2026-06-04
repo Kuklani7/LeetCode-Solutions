@@ -1,0 +1,56 @@
+class Solution {
+    public boolean backspaceCompare(String s, String t) {
+        int s_right_pointer=s.length()-1;
+        int t_right_pointer=t.length()-1;
+        while(s_right_pointer!=-1 || t_right_pointer!=-1){
+            Character first_char_e='a';
+            Character second_char_e='b';
+            boolean first_char=false;
+            boolean second_char=false;
+            int skip_first=0;
+            int skip_second=0;
+            while(!first_char && s_right_pointer!=-1){
+                if(s.charAt(s_right_pointer)=='#'){
+                    skip_first++;
+                    s_right_pointer--;
+                }
+                else if(skip_first!=0){
+                    skip_first--;
+                    s_right_pointer--;
+                }
+                else{
+                    first_char=true;
+                    first_char_e=s.charAt(s_right_pointer);
+                    s_right_pointer--;
+                }
+            }
+            while(!second_char && t_right_pointer!=-1){
+                if(t.charAt(t_right_pointer)=='#'){
+                    skip_second++;
+                    t_right_pointer--;
+                }
+                else if(skip_second!=0){
+                    skip_second--;
+                    t_right_pointer--;
+                }
+                else{
+                    second_char=true;
+                    second_char_e=t.charAt(t_right_pointer);
+                    t_right_pointer--;
+                }
+            }
+            if(first_char==true && second_char==true){
+                if(first_char_e==second_char_e){
+                    continue;
+                }
+            }
+            if(first_char==false && second_char==false){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        return true;        
+    }
+}
