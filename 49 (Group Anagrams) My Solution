@@ -1,0 +1,57 @@
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        HashMap<String, ArrayList<String>> mapping = new HashMap<>();
+
+        for (String current : strs) {
+            HashMap<Character, Integer> use_map = frequency_map(current);
+            String use_code = convert_in_code(use_map);
+
+            if (mapping.containsKey(use_code)) {
+                mapping.get(use_code).add(current);
+            } else {
+                ArrayList<String> to_add = new ArrayList<>();
+                to_add.add(current);
+                mapping.put(use_code, to_add);
+            }
+        }
+
+        List<List<String>> result = new ArrayList<>();
+
+        for (String code : mapping.keySet()) {
+            result.add(mapping.get(code));
+        }
+
+        return result;
+    }
+
+    private static HashMap<Character, Integer> frequency_map(String curr_string) {
+        HashMap<Character, Integer> mapper = new HashMap<>();
+
+        for (char ch : curr_string.toCharArray()) {
+            if (mapper.containsKey(ch)) {
+                int already = mapper.get(ch);
+                mapper.put(ch, already + 1);
+            } else {
+                mapper.put(ch, 1);
+            }
+        }
+
+        return mapper;
+    }
+
+    private static String convert_in_code(HashMap<Character, Integer> frequency_map) {
+        StringBuilder develop = new StringBuilder();
+
+        for (char ch = 'a'; ch <= 'z'; ch++) {
+            if (frequency_map.containsKey(ch)) {
+                develop.append(frequency_map.get(ch));
+            } else {
+                develop.append('0');
+            }
+
+            develop.append('#');
+        }
+
+        return develop.toString();
+    }
+}
