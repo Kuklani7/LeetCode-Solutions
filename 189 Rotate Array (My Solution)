@@ -1,0 +1,23 @@
+class Solution {
+    public void rotate(int[] nums, int shifter) {
+        int k=shifter%nums.length;
+        int [] saver=new int[k];
+        int tracker=0;
+        for(int i=nums.length-k;i<nums.length;i++){
+            saver[tracker]= nums[i];
+            tracker++;
+        }
+        int left=nums.length-(k+1);
+        int right=nums.length-1;
+        while(left>-1){
+            int temp=nums[left];
+            nums[left]=nums[right];
+            nums[right]=temp;
+            left--;
+            right--;
+        }
+        for(int i=0;i<k;i++){
+            nums[i]=saver[i];
+        }
+    }
+}
