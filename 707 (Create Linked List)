@@ -1,0 +1,125 @@
+class MyLinkedList {
+    private Node head;
+    private Node tail;
+    private int size;
+
+    private class Node{
+        int data;
+        Node next;
+        Node(int data){
+            this.data=data;
+            this.next=null;
+        }
+    }
+    public MyLinkedList() {
+        head=null;
+        tail=null;
+        size=0;
+    }
+    
+    public int get(int index) {
+        if(index<0 || index> this.size-1){
+            return -1;
+        }
+        int temp=index;
+        Node mover=this.head;
+        while(temp!=0){
+            mover=mover.next;
+            temp--;
+        }
+        return mover.data;
+    }
+    
+    public void addAtHead(int val) {
+        if(this.head==null){
+            this.head=new Node(val);
+            this.tail=this.head;
+            this.size=1;
+        }
+        else{
+            Node new_head=new Node(val);
+            new_head.next=this.head;
+            this.head=new_head;
+            this.size++;
+        }
+    }
+    
+    public void addAtTail(int val) {
+        if(this.head==null){
+            this.head=new Node(val);
+            this.tail=this.head;
+            this.size=1;
+        }
+        else{
+            Node new_tail=new Node(val);
+            this.tail.next=new_tail;
+            this.tail=new_tail;
+            this.size++;
+        }
+    }
+    
+    public void addAtIndex(int index, int val) {
+        if(index>this.size){
+            return;
+        }
+        if(index<0){
+            addAtHead(val);
+        }
+        if(index==0){
+            addAtHead(val);
+            return;
+        }
+        if(index==this.size){
+            addAtTail(val);
+            return;
+        }
+        int temper=index-1;
+        Node mover=this.head;
+        while(temper!=0){
+            mover=mover.next;
+            temper--;
+        }
+        Node nexter=mover.next;
+        Node curr=new Node(val);
+        mover.next=curr;
+        curr.next=nexter;
+        this.size++;
+        return;
+    }
+    
+    public void deleteAtIndex(int index) { 
+       if(index<0 || index>this.size-1){
+        return;
+       }
+       if(this.head==null){
+        return;
+       }
+       if(this.size==1 && index==0){
+        this.head=null;
+        this.tail=null;
+        this.size=0;
+        return;
+       }
+       if(index==0){
+        this.head=this.head.next;
+        this.size--;
+        return;
+       }
+        int temper=index-1;
+        Node mover=this.head;
+        while(temper!=0){
+            mover=mover.next;
+            temper--;
+        }
+        if(mover.next==this.tail){
+            this.tail=mover;
+            mover.next=null;
+            this.size--;
+        }
+        else{
+            mover.next=mover.next.next;
+            this.size--;
+        }
+        return;
+    }
+}
