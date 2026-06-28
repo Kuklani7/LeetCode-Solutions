@@ -1,0 +1,37 @@
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var applyOperations = function(nums) {
+    for(let i=0;i<nums.length-1;i++){
+        if(nums[i]==nums[i+1]){
+            nums[i]*=2;
+            nums[i+1]=0;
+        }
+    }
+    console.log(nums);
+    let left=0;
+    let right=0;
+    while(right!=nums.length && left!=nums.length){
+        if(nums[left]!=0){
+            left++;
+            continue;
+        }
+        if(nums[right]==0){
+            right++;
+            continue;
+        }
+        if(left>right){
+            right++;
+            continue;
+        }
+        else if(right>=left){
+            let temp=nums[left];
+            nums[left]=nums[right];
+            nums[right]=temp;
+            left++;
+            right++;
+        }
+    }
+    return nums;
+};
