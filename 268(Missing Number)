@@ -1,0 +1,7 @@
+class Solution(object):
+    def missingNumber(self, nums):
+        form_sum=(len(nums))*(len(nums)+1)/2;
+        curr_sum=0;
+        for i in range(len(nums)):
+            curr_sum+=nums[i];
+        return form_sum-curr_sum;
