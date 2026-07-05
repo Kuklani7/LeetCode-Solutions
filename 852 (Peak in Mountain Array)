@@ -1,0 +1,14 @@
+class Solution(object):
+    def peakIndexInMountainArray(self, arr):
+        left=1;
+        right=len(arr)-2;
+        while(left<=right):
+            mid=(left+right)/2;
+            left_lower=arr[mid-1]<arr[mid];
+            right_lower=arr[mid]>arr[mid+1];
+            if left_lower and right_lower:
+                return mid;
+            elif not left_lower:
+                right=mid-1;
+            else:
+                left=mid+1;
