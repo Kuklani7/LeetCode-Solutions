@@ -1,0 +1,48 @@
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if(head.next==null){
+            return true;
+        }
+        ListNode slow_pointer=head;
+        ListNode fast_pointer=head;
+        while(fast_pointer!=null && fast_pointer.next!=null){
+            fast_pointer=fast_pointer.next.next;
+            slow_pointer=slow_pointer.next;
+        }
+        ListNode reverse_point;
+        if(fast_pointer==null){
+            reverse_point=slow_pointer;
+        }
+        else{
+            reverse_point=slow_pointer.next;
+        }
+        ListNode cmp_start=reverseList(reverse_point);
+        while(cmp_start!=null){
+            if(head.val==cmp_start.val){
+                head=head.next;
+                cmp_start=cmp_start.next;
+            }
+            else{
+                return false;
+            }
+        }
+        return true;
+    }
+    private static ListNode reverseList(ListNode haver){
+        if(haver.next==null){
+            return haver;
+        }
+        ListNode prev=null;
+        ListNode mover=haver;
+        ListNode nexter=haver.next;
+        while(mover!=null){
+            mover.next=prev;
+            prev=mover;
+            mover=nexter;
+            if(nexter!=null){
+                nexter=nexter.next;
+            }
+        }
+        return prev;
+    }
+}
