@@ -1,0 +1,27 @@
+class Solution {
+    public boolean isHappy(int n) {
+        int slow_mover=n;
+        int fast_mover=n;
+        while(fast_mover!=1){
+            fast_mover=sumDigits(fast_mover);
+            fast_mover=sumDigits(fast_mover);
+            if(fast_mover==1){
+                break;
+            }
+            slow_mover=sumDigits(slow_mover);
+            if(fast_mover==slow_mover){
+                return false;
+            }
+        }
+        return true;
+    }
+    private static int sumDigits(int num){
+        int sum=0;
+        while(num!=0){
+            int digit=num%10;
+            sum+=(digit*digit);
+            num/=10;
+        }
+        return sum;
+    }
+}
