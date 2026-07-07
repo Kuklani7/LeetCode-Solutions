@@ -1,0 +1,23 @@
+class Solution(object):
+    def searchRange(self, nums, target):
+        exist=self.insertIndex(nums,target);
+        right_idx=self.insertIndex(nums,target+0.5);
+        left_idx=self.insertIndex(nums,target-0.5);
+        if exist!=-1:
+            return [-1,-1];
+        else:
+            return [left_idx, right_idx-1];
+        
+    def insertIndex(self,nums,look_for):
+        left=0;
+        right=len(nums)-1;
+        while(left<=right):
+            mid=(left+right)//2;
+            if look_for==nums[mid]:
+                return -1;
+            elif look_for>nums[mid]:
+                left=mid+1;
+            else:
+                right=mid-1;
+            
+        return left;
