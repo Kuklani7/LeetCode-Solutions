@@ -1,0 +1,11 @@
+int hammingWeight(int n) {
+    unsigned int mask=1;
+    int counter=0;
+    while(mask!=0){
+        if((n & mask)!=0){
+            counter++;
+        }
+        mask<<=1;
+    }
+    return counter;
+}
