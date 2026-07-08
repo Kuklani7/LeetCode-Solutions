@@ -1,0 +1,43 @@
+class Solution {
+    private static void merge(int [] arr, int left, int right,  int mid){
+        int [] temp= new int [(right-left)+1];
+        int inserter=0;
+        int i=left;
+        int j=mid+1;
+        while(i!=mid+1 || j!=right+1){
+            int i_contender= (i==mid+1) ? Integer.MAX_VALUE : arr[i];
+            int j_contender= (j==right+1) ? Integer.MAX_VALUE : arr[j];
+            if(i_contender<=j_contender){
+                temp[inserter]=arr[i];
+                i++;
+            }
+            else{
+                temp[inserter]=arr[j];
+                j++;
+            }
+            inserter++;
+        }
+        for(int give=0; give<temp.length; give++){
+            arr[left+give]=temp[give];
+        }
+        return;
+    }
+
+    private static void mergeSortHelper(int [] arr, int left, int right){
+        if(left>=right){
+            return;
+        }
+        int mid=(left+right)/2;
+        mergeSortHelper(arr, left, mid);
+        mergeSortHelper(arr,mid+1,right);
+        merge(arr, left, right, mid);
+    }
+
+    public int[] sortArray(int[] nums) {
+        if(nums.length==1){
+            return nums;
+        }
+        mergeSortHelper(nums, 0, nums.length-1);
+        return nums;
+    }   
+}
