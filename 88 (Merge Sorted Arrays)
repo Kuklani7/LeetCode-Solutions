@@ -1,0 +1,21 @@
+class Solution {
+    public void merge(int[] nums1, int first_length, int[] nums2, int second_length) {
+        int m=first_length-1;
+        int n =second_length-1;
+        int inserter=(first_length+second_length)-1;
+        while(m!=-1 || n!=-1){
+            int arr2_contender= (n<=-1) ? Integer.MIN_VALUE : nums2[n];
+            int arr1_contender= (m<=-1) ? Integer.MIN_VALUE : nums1[m];
+            if(arr1_contender>arr2_contender){
+                nums1[inserter]=arr1_contender;
+                inserter--;
+                m--;
+            }
+            else{
+                nums1[inserter]=arr2_contender;
+                inserter--;
+                n--;
+            }
+        }
+    }
+}
