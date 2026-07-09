@@ -1,0 +1,33 @@
+class Solution {
+    public int[] decrypt(int[] code, int k) {
+        if(k==0){
+            for(int i=0; i<code.length; i++){
+                code[i]=0;
+            }
+        }
+        int [] value_saver= new int [code.length];
+        if(k>0){
+            for(int i=0; i<code.length;i++){
+                int temp=k;
+                int sum=0;
+                while(temp!=0){
+                    sum+=code[((i+temp)%code.length)];
+                    temp--;
+                }
+                value_saver[i]=sum;
+            }
+        }
+        if(k<0){
+            for(int i=0; i<code.length; i++){
+                int temp=Math.abs(k);
+                int sum=0;
+                while(temp!=0){
+                    sum+=code[((i+code.length-temp)%code.length)];
+                    temp--;
+                }
+                value_saver[i]=sum;
+            }
+        }
+        return value_saver;
+    }
+}
