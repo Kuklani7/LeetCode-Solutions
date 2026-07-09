@@ -1,0 +1,22 @@
+class Solution(object):
+    def findRestaurant(self, list1, list2):
+        one_mapper={};
+        sum_mapper={};
+        idx=0;
+        for strs in list1 :
+            one_mapper[strs]=idx;
+            idx+=1;
+        idx_tracker=0;
+        min_sum=5000;
+        for strs in list2 :
+            if strs in one_mapper:
+                curr_sum= idx_tracker+one_mapper[strs]
+                sum_mapper[strs] = curr_sum;
+                if curr_sum < min_sum:
+                    min_sum=curr_sum;
+            idx_tracker+=1;
+        ret_val=[];
+        for strs in sum_mapper:
+            if sum_mapper[strs] == min_sum:
+                ret_val.append(strs);
+        return ret_val;
