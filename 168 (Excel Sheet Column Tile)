@@ -1,0 +1,13 @@
+class Solution {
+    StringBuilder ret_val= new StringBuilder();
+    public String convertToTitle(int columnNumber) {
+        int temp=columnNumber;
+        while(temp!=0){
+            temp--;
+            int num=temp%26;
+            ret_val.insert(0, (char) (num+65));
+            temp/=26;
+        }
+        return ret_val.toString();
+    }
+}
