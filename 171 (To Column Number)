@@ -1,0 +1,11 @@
+class Solution {
+    public int titleToNumber(String columnTitle) {
+        int total=0;
+        for(int i=0; i<columnTitle.length();i++){
+            char ch= columnTitle.charAt(i);
+            int rep= (int)(((int)ch)-64);
+            total=(total*26)+rep;
+        }
+        return total;
+    }
+}
