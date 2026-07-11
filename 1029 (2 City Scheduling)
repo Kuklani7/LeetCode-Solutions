@@ -1,0 +1,55 @@
+class Solution {
+    public int twoCitySchedCost(int[][] costs) {
+        modified_Sort_Helper(costs, 0, costs.length-1);
+        for(int [] x:costs){
+            System.out.println(x[0]-x[1]);
+        }
+        int total=0;
+        for(int i=0; i<costs.length;i++){
+            if(i<(costs.length/2)){
+                total+=costs[i][0];
+            }
+            else{
+                total+=costs[i][1];
+            }
+        }
+        return total;
+    }
+    private static void modified_Sort_Helper(int [][] costs, int left, int right){
+        if(left>=right){
+            return;
+        }
+        int mid= (left+right)/2;
+        modified_Sort_Helper(costs, left, mid);
+        modified_Sort_Helper(costs, mid+1, right);
+        merge(costs, left, right, mid);
+    }
+    private static void merge(int [][] costs, int left, int right, int mid){
+        int [][] temp= new int[(right-left)+1][2];
+        int inserter=0;
+        int i=left;
+        int j=mid+1;
+        while(i!=mid+1 || j!=right+1){
+            int [] holder= new int[2];
+            holder[1]=0;
+            holder[0]=Integer.MAX_VALUE;
+            int [] i_contend= (i==mid+1) ? holder : costs[i];
+            int [] j_contend= (j==right+1) ? holder : costs[j];
+            int i_num = i_contend[0]-i_contend[1];
+            int j_num= j_contend[0]- j_contend[1];
+            if(i_num<=j_num){
+                temp[inserter]=i_contend;
+                inserter++;
+                i++;
+            }
+            else{
+                temp[inserter]=j_contend;
+                j++;
+                inserter++;
+            }
+        }
+        for(int gave=0; gave<temp.length; gave++){
+            costs[left+gave]=temp[gave];
+        }
+    }
+}
