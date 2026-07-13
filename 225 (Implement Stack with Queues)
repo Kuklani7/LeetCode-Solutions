@@ -1,0 +1,33 @@
+class MyStack {
+
+    Queue<Integer> main = new LinkedList<>();
+    Queue<Integer> helper = new LinkedList<>();
+
+    public MyStack() {
+        
+    }
+    
+    public void push(int x) {
+        helper.offer(x);
+        while(!main.isEmpty()){
+            helper.offer(main.poll());
+        }
+        Queue<Integer> temp=main;
+        main=helper;
+        helper=temp;
+    }
+    
+    public int pop() {
+        int hmm=main.poll();
+        return hmm;
+    }
+    
+    public int top() {
+        int hmm=main.peek();
+        return hmm;
+    }
+    
+    public boolean empty() {
+        return main.isEmpty();
+    }
+}
