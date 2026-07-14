@@ -1,0 +1,21 @@
+class Solution {
+    public String largestOddNumber(String display) {
+        StringBuilder sb= new StringBuilder();
+        int mark=-10;
+        for(int i=display.length()-1; i>-1;i--){
+            if(((int) display.charAt(i)) %2 ==1){
+                mark=i;
+                break;
+            }
+        }
+        if(mark<0){
+            return sb.toString();
+        }
+        else{
+            for(int i=0; i<=mark;i++){
+                sb.append(display.charAt(i));
+            }
+            return sb.toString();
+        }
+    }
+}
