@@ -1,0 +1,23 @@
+class Solution {
+    public int maxFreqSum(String s) {
+        int [] freq_arr= new int [26];
+        for(int i=0;i<s.length();i++){
+            freq_arr[((int)s.charAt(i))-97]+=1;
+        }
+        int vow_max=Integer.MIN_VALUE;
+        int cons_max=Integer.MIN_VALUE;
+        for(int i=0;i<freq_arr.length;i++){
+            if(i==0 || i==4 || i==8 || i==14 || i==20){
+                if(freq_arr[i]>vow_max){
+                    vow_max=freq_arr[i];
+                }
+            }
+            else{
+                if(freq_arr[i]>cons_max){
+                    cons_max=freq_arr[i];
+                }
+            }
+        }
+        return vow_max+cons_max;
+    }
+}
