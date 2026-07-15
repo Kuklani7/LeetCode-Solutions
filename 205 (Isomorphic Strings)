@@ -1,0 +1,26 @@
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        HashSet<Character> t_mappings= new HashSet<>();
+        HashMap<Character, Character> mapper= new HashMap<>();
+        for(int i=0;i<s.length();i++){
+            if(!mapper.containsKey(s.charAt(i))){
+                if(t_mappings.contains(t.charAt(i))){
+                    return false;
+                }
+                mapper.put(s.charAt(i), t.charAt(i));
+                t_mappings.add(t.charAt(i));
+            }
+            else{
+                char hmm= mapper.get(s.charAt(i));
+                char in_t=t.charAt(i);
+                if(hmm==in_t){
+                    continue;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
