@@ -1,0 +1,33 @@
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head==null || head.next==null){
+            return head;
+        }
+        int counter=0;
+        ListNode mover=head;
+        while(mover!=null){
+            mover=mover.next;
+            counter++;
+        }
+        int act=k % counter;
+        if(act==0){
+            return head;
+        }
+        ListNode dummy_head= new ListNode(-1,head);
+        ListNode fp=dummy_head;
+        ListNode sp=dummy_head;
+        while(act!=0){
+            sp=sp.next;
+            act--;
+        }
+        while(sp.next!=null){
+            fp=fp.next;
+            sp=sp.next;
+        }
+        ListNode attach=dummy_head.next;
+        ListNode new_start=fp.next;
+        fp.next=null;
+        sp.next=head;
+        return new_start;
+    }
+}
