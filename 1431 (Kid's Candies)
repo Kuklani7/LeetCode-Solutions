@@ -1,0 +1,13 @@
+class Solution(object):
+    def kidsWithCandies(self, candies, extraCandies):
+        ret_val=[];
+        maximum=-1;
+        for i in range(len(candies)):
+            if candies[i]>maximum:
+                maximum=candies[i];
+        for i in range(len(candies)):
+            if candies[i]+extraCandies>=maximum:
+                ret_val.append(True);
+            else:
+                ret_val.append(False);
+        return ret_val;
